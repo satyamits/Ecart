@@ -113,7 +113,8 @@ Ecart/
 
 **Satyam Singh**  
 > iOS Developer • Swift Enthusiast • SwiftUI Lover  
-[LinkedIn]([https://www.linkedin.com/in/your-link-here](https://www.linkedin.com/in/satyamits/)) • [Github]([https://your-portfolio-link.com](https://github.com/satyamits))
+[LinkedIn](https://www.linkedin.com/in/satyamits/) • [GitHub](https://github.com/satyamits)
+
 
 ---
 
