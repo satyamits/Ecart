@@ -1,6 +1,5 @@
-<<<<<<< HEAD
+
 # Ecart
-=======
 # 🛒 Ecart - SwiftUI E-commerce App
 
 Ecart is a modern iOS e-commerce application built using **SwiftUI**, powered by data from [FakeStoreAPI](https://fakestoreapi.com/). It features product listings, category filtering, product detail views, cart management, and favorites — all integrated with **SwiftData** for local persistence.
@@ -127,4 +126,4 @@ This project is licensed under the [MIT License](LICENSE).
 ## 🤝 Contributions
 
 Contributions are welcome! Feel free to fork this repo and open a PR.
->>>>>>> feature
+
