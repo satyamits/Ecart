@@ -30,11 +30,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		5F8C5DAF2DB27D44006726BF /* Ecart */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Ecart;
-			sourceTree = "<group>";
-		};
 		5F8C5DC02DB27D45006726BF /* EcartTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = EcartTests;
@@ -43,6 +38,11 @@
 		5F8C5DCA2DB27D45006726BF /* EcartUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = EcartUITests;
+			sourceTree = "<group>";
+		};
+		5F8C5DEB2DB28640006726BF /* Ecart */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Ecart;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,7 +75,7 @@
 		5F8C5DA42DB27D44006726BF = {
 			isa = PBXGroup;
 			children = (
-				5F8C5DAF2DB27D44006726BF /* Ecart */,
+				5F8C5DEB2DB28640006726BF /* Ecart */,
 				5F8C5DC02DB27D45006726BF /* EcartTests */,
 				5F8C5DCA2DB27D45006726BF /* EcartUITests */,
 				5F8C5DAE2DB27D44006726BF /* Products */,
@@ -108,7 +108,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				5F8C5DAF2DB27D44006726BF /* Ecart */,
+				5F8C5DEB2DB28640006726BF /* Ecart */,
 			);
 			name = Ecart;
 			packageProductDependencies = (
