@@ -8,8 +8,8 @@ Ecart is a modern iOS e-commerce application built using **SwiftUI**, powered by
 
 ## 📽️ Demo Video
 
-👉 [Watch the Demo Video](https://your-video-link-here.com)  
-*(Replace the above link with your actual video link once uploaded)*
+👉 [Watch the Demo Video] 
+
 
 ---
 
@@ -113,7 +113,7 @@ Ecart/
 
 **Satyam Singh**  
 > iOS Developer • Swift Enthusiast • SwiftUI Lover  
-[LinkedIn](https://www.linkedin.com/in/your-link-here) • [Portfolio](https://your-portfolio-link.com)
+[LinkedIn]([https://www.linkedin.com/in/your-link-here](https://www.linkedin.com/in/satyamits/)) • [Github]([https://your-portfolio-link.com](https://github.com/satyamits))
 
 ---
 
