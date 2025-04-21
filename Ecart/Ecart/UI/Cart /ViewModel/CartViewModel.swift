@@ -96,4 +96,10 @@ class CartViewModel: ObservableObject {
             items.append(newItem)
         }
     }
+    
+    func clearSelectedItems() {
+        let selectedItemIDs = Set(self.selectedItems.map { $0.id })
+        self.items.removeAll { selectedItemIDs.contains($0.id) }
+    }
+
 }

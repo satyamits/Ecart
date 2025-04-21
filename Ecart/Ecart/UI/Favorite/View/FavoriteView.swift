@@ -27,6 +27,12 @@ struct FavoriteView: View {
         } else {
             ScrollView {
                 LazyVStack(spacing: 12) {
+                    HStack {
+                        Text("Favorites")
+                            .font(.title.bold())
+                            .foregroundColor(Color.black)
+                        Spacer()
+                    }
                     ForEach(viewModel.getLikedProducts(), id: \.id) { product in
                         let isLiked = Binding(
                             get: { viewModel.favorites.contains(product.id ?? -1) },

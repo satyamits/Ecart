@@ -11,101 +11,119 @@ import SwiftUI
 // MARK: - SwiftUI View
 struct CartView: View {
     @StateObject var viewModel: CartViewModel
+    @State var showThankYouAlert: Bool = false
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 12) {
-                headerView
-                
-                VStack {
-                    ScrollView {
-                        HStack(spacing: 24) {
-                            Button {
-                                viewModel.toggleSelectAll()
-                            } label: {
-                                HStack {
-                                    Image(systemName: self.viewModel.isSelectAll ? "checkmark.square.fill" : "square")
+            ZStack {
+                VStack(spacing: 12) {
+                    headerView
+                    
+                    VStack {
+                        ScrollView {
+                            HStack(spacing: 24) {
+                                Button {
+                                    viewModel.toggleSelectAll()
+                                } label: {
+                                    HStack {
+                                        Image(systemName: self.viewModel.isSelectAll ? "checkmark.square.fill" : "square")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 24, height: 24)
+                                            .foregroundColor(viewModel.isSelectAll ? .green : .gray)
+                                        Text("Select all")
+                                            .font(.subheadline.bold())
+                                            .foregroundColor(.black)
+                                        
+                                    }
+                                }
+                                Spacer()
+                                Button {
+                                    print("Share tapped")
+                                } label: {
+                                    Image(systemName: "square.and.arrow.up")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .foregroundColor(.black)
+                                        .frame(width: 24, height: 24)
+                                }
+                                Button {
+                                    self.viewModel.isEditing.toggle()
+                                } label: {
+                                    Image(systemName: self.viewModel.isEditing ? "pencil.line" : "square.and.pencil")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 24, height: 24)
-                                        .foregroundColor(viewModel.isSelectAll ? .green : .gray)
-                                    Text("Select all")
-                                        .font(.subheadline.bold())
                                         .foregroundColor(.black)
-                                    
+                                }
+                                
+                                
+                            }
+                            .padding(.vertical, 16)
+                            // List of Cart Items
+                            
+                            LazyVStack {
+                                ForEach(self.$viewModel.items) { $item in
+                                    CartItemRoww(viewModel: viewModel, item: $item)
                                 }
                             }
-                            Spacer()
-                            Button {
-                                print("Share tapped")
-                            } label: {
-                                Image(systemName: "square.and.arrow.up")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundColor(.black)
-                                    .frame(width: 24, height: 24)
-                            }
-                            Button {
-                                self.viewModel.isEditing.toggle()
-                            } label: {
-                                Image(systemName: self.viewModel.isEditing ? "pencil.line" : "square.and.pencil")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 24, height: 24)
-                                    .foregroundColor(.black)
-                            }
-                            
-                            
                         }
-                        .padding(.vertical, 16)
-                        // List of Cart Items
                         
-                        LazyVStack {
-                            ForEach(self.$viewModel.items) { $item in
-                                CartItemRoww(viewModel: viewModel, item: $item)
+                        // Bottom Section: Checkout Button
+                        VStack(spacing: 0) {
+                            Divider()
+                            if !viewModel.selectedItems.isEmpty {
+                                HStack {
+                                    Text("Total:")
+                                        .font(.headline)
+                                    Spacer()
+                                    Text("£\(viewModel.totalSelectedPrice, specifier: "%.2f")")
+                                        .font(.headline)
+                                }
+                                .padding()
+                            } else {
+                                Text("Add Products to Cart")
+                                    .foregroundColor(Color.black)
                             }
-                        }
-                    }
-                    
-                    // Bottom Section: Checkout Button
-                    VStack(spacing: 0) {
-                        Divider()
-                        if !viewModel.selectedItems.isEmpty {
-                            HStack {
-                                Text("Total:")
+                            
+                            
+                            Button {
+                                // Handle checkout action
+                                print("Checkout tapped with selected items: \(viewModel.selectedItems)")
+                                self.showThankYouAlert.toggle()
+                            } label: {
+                                Text("Checkout")
                                     .font(.headline)
-                                Spacer()
-                                Text("£\(viewModel.totalSelectedPrice, specifier: "%.2f")")
-                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(viewModel.selectedItems.isEmpty ? Color.gray : Color.green)
+                                    .cornerRadius(10)
                             }
                             .padding()
-                        } else {
-                            Text("Add Products to Cart")
-                                .foregroundColor(Color.black)
+                            .disabled(viewModel.selectedItems.isEmpty)
+                            
                         }
-                       
-                        
-                        Button {
-                            // Handle checkout action
-                            print("Checkout tapped with selected items: \(viewModel.selectedItems)")
-                        } label: {
-                            Text("Checkout")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(viewModel.selectedItems.isEmpty ? Color.gray : Color.green)
-                                .cornerRadius(10)
-                        }
-                        .padding()
-                        .disabled(viewModel.selectedItems.isEmpty)
                     }
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(12)
                 }
-                .padding()
-                .background(Color.white)
-                .cornerRadius(12)
+                .background(Color(.systemGray6))
+                // 🔔 Custom Alert Overlay
+                if showThankYouAlert {
+                    Color.black.opacity(0.4)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    ThankYouAlertView {
+                        withAnimation {
+                            showThankYouAlert = false
+                            viewModel.clearSelectedItems()
+                        }
+                    }
+                    .transition(.scale)
+                }
             }
-            .background(Color(.systemGray6))
         }
     }
 }
@@ -161,7 +179,7 @@ struct CartItemRoww: View {
                     EmptyView()
                 }
             }
-                
+            
             
             VStack(alignment: .leading, spacing: 34) {
                 Text(item.name)
@@ -204,11 +222,15 @@ struct CartItemRoww: View {
             
         }
         .onChange(of: self.viewModel.items.first(where: {
-            $0.id == item.id })?.isSelected) { newValue, _ in
-                if let newValue {
-                    self.item.isSelected = newValue
-                }
+            $0.id == item.id
+        })?.isSelected) { newValue, _ in
+            guard let newValue = newValue else { return }
+        
+            if let index = self.viewModel.items.firstIndex(where: { $0.id == item.id }) {
+                self.viewModel.items[index].isSelected = newValue
             }
+        }
+
     }
 }
 

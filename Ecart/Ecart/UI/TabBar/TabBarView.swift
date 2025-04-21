@@ -21,7 +21,7 @@ struct TabBarView: View {
             tabButton(icon: "house.fill", title: "Home", tab: .home, color: Color(.systemGreen))
             tabButton(icon: "arrow.triangle.2.circlepath", title: "Catalog", tab: .catalog)
             cartButton(icon: "cart", title: "Cart", tab: .cart)
-            tabButton(icon: "heart", title: "Favorites", tab: .favorites)
+            tabButton(icon: "heart", title: "Favorites", tab: .favorites, color: Color.red)
             tabButton(icon: "person", title: "Profile", tab: .profile)
         }
         .padding(.vertical, 12)

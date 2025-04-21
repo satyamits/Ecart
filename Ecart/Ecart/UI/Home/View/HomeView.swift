@@ -12,7 +12,6 @@ struct HomeView: View {
     
     @StateObject var viewModel = HomeViewModel()
     @State private var selectedTab: Tab = .home
-    @State private var cartItemCount = 2
     @State private var selectedProduct: ProductElement? = nil
     @State private var showDetail = false
     @StateObject var cartViewModel = CartViewModel()
@@ -271,13 +270,10 @@ struct HomeView: View {
 
 
         case .profile:
-            Text("Profile View") 
+            ProfileView()
         }
     }
-
-    
 }
-
 
 #Preview {
     HomeView()
